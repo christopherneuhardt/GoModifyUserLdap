@@ -1,5 +1,5 @@
 package handlers
-///////roar
+
 //Created By: Ricky Clevinger
 //Updated On: 8/17/2017
 //Last Updated By: Ricky Clevinger
@@ -8,6 +8,7 @@ import (
 	"html/template"
 	"net/http"
 	"regexp"
+	"modify"
 )
 
 var validPath = regexp.MustCompile("^/(index.html)$")
@@ -60,5 +61,6 @@ func Redirect(w http.ResponseWriter, r *http.Request) {
 func Handles() {
 
 	http.HandleFunc("/index.html", MakeHandler(IndexHandler))
+	http.HandleFunc("/modify", modify.Modify)
 	http.HandleFunc("/", Redirect)
 }

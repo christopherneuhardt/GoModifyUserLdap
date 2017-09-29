@@ -8,11 +8,11 @@
     <body>
         <div class="formb">
 		<div align=center style="font-size:14px;font-weight:bold;">User Modification</div>
-		<form action="{$smarty.server.REQUEST_URI}" method="post">
+		<form action="modify" method="POST">
 		<table align="center">
 		<tr>
 			<td><div class="label">User ID:</div></td>
-			<td><div class="field"><input name="uid" type="text"></div></td>
+			<td><div class="field"><input name="uid" id="uid "type="text"></div></td>
 		</tr>
 		<tr>
 			<td></td><td><div class="submit"><input type="submit" name="submitUserId" value="Submit"></div></td>
