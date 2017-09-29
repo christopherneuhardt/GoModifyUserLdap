@@ -13,7 +13,7 @@ func Modify(res http.ResponseWriter, req *http.Request){
 	password := os.Args[2]
 	//uid := req.FormValue("uid")
 
-	l, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", "162.70.12.25", 389))
+	l, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", os.Args[3], 389))
 	if err != nil {
 		log.Fatal(err)
 	}
