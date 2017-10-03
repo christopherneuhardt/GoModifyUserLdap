@@ -29,28 +29,28 @@ type Page struct {
 	DisplayName string
 	LogShell string
 	Mobile string
-	Disabled bool
-	SeTeam bool
-	Jira bool
-	Jrebel bool
-	Nagios bool
-	Owncloud bool
-	RocketChat bool
-	SassyDev bool
-	SassyProd bool
-	SavvyServiceDesk bool
-	Solaris_Linux bool
-	Subversion bool
-	VNC bool
-	Wiki bool
+	Disabled string
+	SeTeam string
+	Jira string
+	Jrebel string
+	Nagios string
+	Owncloud string
+	RocketChat string
+	SassyDev string
+	SassyProd string
+	SavvyServiceDesk string
+	Solaris_Linux string
+	Subversion string
+	VNC string
+	Wiki string
 }
 
 func LoadPage() *Page {
 	return &Page{}
 }
 
-func LoadEditPage(uid, first, last, email, displayname, gnum, mobile, uidnum, homedir, logshell string) *Page {
-	return &Page{Uid: uid, First: first, Last: last, Email: email, DisplayName: displayname, GNum: gnum, Mobile: mobile, UidNum: uidnum, HomeDir: homedir, LogShell: logshell}
+func LoadEditPage(uid, first, last, email, displayname, gnum, mobile, uidnum, homedir, logshell, disabled, seteam, jira, jrebel, nagios, owncloud, rocketchat, sassydev, sassyprod, savvyservicedesk, solaris_linux, subversion, vnc, wiki string) *Page {
+	return &Page{Uid: uid, First: first, Last: last, Email: email, GNum: gnum, UidNum: uidnum, HomeDir: homedir, DisplayName: displayname, LogShell: logshell, Mobile: mobile, Disabled: disabled, SeTeam: seteam, Jira: jira, Jrebel: jrebel, Nagios: nagios, Owncloud: owncloud, RocketChat: rocketchat, SassyDev: sassydev, SassyProd: sassyprod, SavvyServiceDesk: savvyservicedesk, Solaris_Linux: solaris_linux, Subversion: subversion, VNC: vnc, Wiki: wiki}
 }
 
 
@@ -111,7 +111,7 @@ func Search(uid string) *Page{
     "uid=rclevinger,ou=People,dc=spg,dc=cgi,dc=com", // The base dn to search
     ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
 	"(&(uid="+ uid +"))",// The filter to apply
-    []string{"givenName", "sn", "mail", "displayName", "gidNumber", "mobile", "uidNumber", "homeDirectory", "loginShell" },                    // A list attributes to retrieve
+    []string{"givenName", "sn", "mail", "displayName", "gidNumber", "mobile", "uidNumber", "homeDirectory", "loginShell", "employeeType" },                    // A list attributes to retrieve
     nil,
 	)
 	
@@ -122,16 +122,22 @@ func Search(uid string) *Page{
 	
 	
 	for _, entry := range sr.Entries {
-	given := entry.GetAttributeValue("givenName")
-	last := entry.GetAttributeValue("sn")
-	mail := entry.GetAttributeValue("mail")
-	display := entry.GetAttributeValue("displayName")
-	gnum := entry.GetAttributeValue("gidNumber")
-	mobile := entry.GetAttributeValue("mobile")
-	uidNumber := entry.GetAttributeValue("uidNumber")
-	homeDirectory := entry.GetAttributeValue("homeDirectory")
-	loginShell := entry.GetAttributeValue("loginShell")
-	return LoadEditPage(uid, given, last, mail, display, gnum, mobile, uidNumber, homeDirectory, loginShell)
+		given := entry.GetAttributeValue("givenName")
+		last := entry.GetAttributeValue("sn")
+		mail := entry.GetAttributeValue("mail")
+		display := entry.GetAttributeValue("displayName")
+		gnum := entry.GetAttributeValue("gidNumber")
+		mobile := entry.GetAttributeValue("mobile")
+		uidNumber := entry.GetAttributeValue("uidNumber")
+		homeDirectory := entry.GetAttributeValue("homeDirectory")
+		loginShell := entry.GetAttributeValue("loginShell")
+		disabled := ""
+		for _, empType := range entry.GetAttributeValues("employeeType") {
+			if(empType == "disabled") {
+				disabled = "checked"
+			}
+		}
+		return LoadEditPage(uid, given, last, mail, display, gnum, mobile, uidNumber, homeDirectory, loginShell, disabled, "", "", "", "", "", "", "", "", "", "", "", "", "",)
 	}
 	
 	return LoadPage()
