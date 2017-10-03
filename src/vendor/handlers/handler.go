@@ -45,8 +45,12 @@ type Page struct {
 	Wiki bool
 }
 
-func LoadPage(uid string) *Page {
-	return &Page{Uid: uid}
+func LoadPage() *Page {
+	return &Page{}
+}
+
+func LoadEditPage(uid, first, last, email, displayname, gnum, mobile, uidnum, homedir, logshell string) *Page {
+	return &Page{Uid: uid, First: first, Last: last, Email: email, DisplayName: displayname, GNum: gnum, Mobile: mobile, UidNum: uidnum, HomeDir: homedir, LogShell: logshell}
 }
 
 
@@ -72,8 +76,8 @@ func MakeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 
 //Handles the index page
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-	uid := "rclevinger"
-	p := LoadPage(uid)
+	//uid := "rclevinger"
+	p := LoadPage()
 	RenderTemplate(w, "index", p)
 }
 
@@ -107,7 +111,7 @@ func Search(uid string) *Page{
     "uid=rclevinger,ou=People,dc=spg,dc=cgi,dc=com", // The base dn to search
     ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
 	"(&(uid="+ uid +"))",// The filter to apply
-    []string{"sn"},                    // A list attributes to retrieve
+    []string{"givenName", "sn", "mail", "displayName", "gidNumber", "mobile", "uidNumber", "homeDirectory", "loginShell" },                    // A list attributes to retrieve
     nil,
 	)
 	
@@ -116,11 +120,21 @@ func Search(uid string) *Page{
     log.Fatal(err)
 	}
 	
+	
 	for _, entry := range sr.Entries {
-    fmt.Println(entry.GetAttributeValue("sn"))
+	given := entry.GetAttributeValue("givenName")
+	last := entry.GetAttributeValue("sn")
+	mail := entry.GetAttributeValue("mail")
+	display := entry.GetAttributeValue("displayName")
+	gnum := entry.GetAttributeValue("gidNumber")
+	mobile := entry.GetAttributeValue("mobile")
+	uidNumber := entry.GetAttributeValue("uidNumber")
+	homeDirectory := entry.GetAttributeValue("homeDirectory")
+	loginShell := entry.GetAttributeValue("loginShell")
+	return LoadEditPage(uid, given, last, mail, display, gnum, mobile, uidNumber, homeDirectory, loginShell)
 	}
 	
-	return LoadPage(uid)
+	return LoadPage()
 
 }
 
