@@ -10,6 +10,9 @@ import (
 	"regexp"
 	"modify"
 	"fmt"
+	"os"
+	"gopkg.in/ldap.v2"
+	"log"
 )
 
 var validPath = regexp.MustCompile("^/(index.html|edit.html)$")
@@ -17,11 +20,35 @@ var templates = template.Must(template.ParseFiles("views/index.html", "views/edi
 
 type Page struct {
 	Uid string
+	First string
+	Last string
+	Email string
+	GNum string
+	UidNum string
+	HomeDir string
+	DisplayName string
+	LogShell string
+	Mobile string
+	Disabled bool
+	SeTeam bool
+	Jira bool
+	Jrebel bool
+	Nagios bool
+	Owncloud bool
+	RocketChat bool
+	SassyDev bool
+	SassyProd bool
+	SavvyServiceDesk bool
+	Solaris_Linux bool
+	Subversion bool
+	VNC bool
+	Wiki bool
 }
 
 func LoadPage(uid string) *Page {
 	return &Page{Uid: uid}
 }
+
 
 //Renders HTML page
 func RenderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
@@ -53,10 +80,48 @@ func IndexHandler(w http.ResponseWriter, r *http.Request) {
 //Handles the edit page
 func EditHandler(w http.ResponseWriter, r *http.Request) {
 	r.ParseForm()
-	
+
 	uid := r.Form["uid"]
-	p := LoadPage(uid[0])
+	
+	p := Search(uid[0])
 	RenderTemplate(w, "edit", p)
+}
+
+func Search(uid string) *Page{
+	
+	username := os.Args[1]
+	password := os.Args[2]
+
+	l, err := ldap.Dial("tcp", fmt.Sprintf("%s:%d", os.Args[3], 389))
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer l.Close()
+
+	err = l.Bind(username, password)
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	searchRequest := ldap.NewSearchRequest(
+    "uid=rclevinger,ou=People,dc=spg,dc=cgi,dc=com", // The base dn to search
+    ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
+	"(&(uid=rclevinger))",// The filter to apply
+    []string{"sn"},                    // A list attributes to retrieve
+    nil,
+	)
+	
+	sr, err := l.Search(searchRequest)
+	if err != nil {
+    log.Fatal(err)
+	}
+	
+	for _, entry := range sr.Entries {
+    fmt.Println(entry.GetAttributeValue("sn"))
+	}
+	
+	return LoadPage(uid)
+
 }
 
 
