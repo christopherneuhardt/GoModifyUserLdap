@@ -1,0 +1,96 @@
+<div class="form">
+    <div align=center style="font-size:14px;font-weight:bold;">User Modification</div>
+	<form action="modify" method="post">
+	<table align="center">
+    <tr>
+        <td><div>User ID:</div></td>
+    	<td><div>{{.Uid}}</div></td>
+        <td><div><input name="uid" type="hidden" value={{.Uid}}></div></td>
+        <td><div><input name="submitUserId" type="hidden" value="true"></div></td>
+    
+	</tr>
+    <tr>
+        <td><div>First Name:*</div></td>
+    	<td><div class="field"><input name="firstname" type="text" value="firstName"></div></td>
+	</tr>
+    <tr>
+	<td><div>Last Name:*</div></td>
+    	<td><div class="field"><input name="lastname"type="text" value="lastName"></div></td>
+	</tr>
+    <tr>
+        <td><div>Email Address:*</div></td>    
+	<td><div class="field"><input name="email" type="text" value="emailAddress"></div></td>
+    </tr>
+    <tr>
+    <td><div>Group Number:*</div></td>    
+	<td><div class="field"><input name="gidnumber" id="gidnumber" type="text" value="gidNumber" disabled></div></td>
+    </tr>
+
+    <tr>
+        <td><div>UID Number:*</div></td>    
+    <td><div class="field"><input name="uidnumber" id="uidnumber" type="text" value="uidNumber"></div></td><td><a href="http://bud.ams.com" target="_blank">Find Employee in BUD</a></td>
+    </tr>
+    <tr>
+        <td><div>Home Directory:</div></td>    
+	<td><div class="field"><input name="homedirectory" id="homedirectory" type="text" value="homeDirectory"></div></td>
+    </tr>
+    <tr>
+        <td><div>Display Name:</div></td>    
+	<td><div class="field"><input name="displayname" type="text" value="displayName"></div></td>
+    </tr>
+    <tr>
+        <td><div>Login Shell:</div></td>    
+	<td><div class="field"><input name="loginshell" id="loginshell" type="text" value="loginShell"></div></td>
+    </tr>
+    <tr>
+        <td><div>Mobile:</div></td>    
+	<td><div class="field"><input name="mobile" type="text" value="mobileNumber"></div></td>
+    </tr>
+    <tr>
+        <td><input name="disabled" type="checkbox"><div class="label">Disabled</div></td>
+    </tr>
+    <tr>
+        <td><input name="seteamaccess" type="checkbox"><div class="label">SE Team member?</div></td>
+    </tr>
+    <tr>
+        <td><input name="jiraaccess" type="checkbox"><div class="label">JIRA Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="jrlsaccess" type="checkbox"><div class="label">JRebel License Server Admin Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="nagiosaccess" type="checkbox"><div class="label">Nagios Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="owncloudaccess" type="checkbox"><div class="label">OwnCloud Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="rocketchataccess" type="checkbox"><div class="label">Rocket.Chat Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="sassydevaccess" type="checkbox"><div class="label">Sassy Dev Access</div></td>    
+    </tr>
+    <tr>
+        <td><input name="sassyprodaccess" type="checkbox"><div class="label">Sassy Prod Access</div></td>    
+    </tr>
+    <tr>
+        <td><input name="savvyservicedeskaccess" type="checkbox"><div class="label">Savvy Service Desk</div></td>    
+    </tr>
+    <tr>
+        <td><input name="solaccess" id="solaccess" type="checkbox"><div class="label">Solaris/Linux Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="svnaccess" type="checkbox"><div class="label">Subversion Access</div></td>
+    </tr>
+    <tr>
+        <td><input name="vncaccess" type="checkbox"><div class="label">VNC Access</div></td>	
+    </tr>
+    <tr>
+        <td><input name="wikiaccess" type="checkbox"><div class="label">Wiki Access</div></td>
+    </tr>
+    <tr>
+	    <td></td><td><div class="submit"><input type="submit" name="submitChanges" value="Submit Changes"></div></td>
+    </tr>
+</table>
+</form>
+</div>

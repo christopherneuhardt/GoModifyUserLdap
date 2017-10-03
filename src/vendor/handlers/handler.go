@@ -9,17 +9,18 @@ import (
 	"net/http"
 	"regexp"
 	"modify"
+	"fmt"
 )
 
-var validPath = regexp.MustCompile("^/(index.html)$")
-var templates = template.Must(template.ParseFiles("views/index.html"))
+var validPath = regexp.MustCompile("^/(index.html|edit.html)$")
+var templates = template.Must(template.ParseFiles("views/index.html", "views/edit.html"))
 
 type Page struct {
+	Uid string
 }
 
-func LoadPage() *Page {
-
-	return &Page{}
+func LoadPage(uid string) *Page {
+	return &Page{Uid: uid}
 }
 
 //Renders HTML page
@@ -44,9 +45,18 @@ func MakeHandler(fn func(http.ResponseWriter, *http.Request)) http.HandlerFunc {
 
 //Handles the index page
 func IndexHandler(w http.ResponseWriter, r *http.Request) {
-
-	p := LoadPage()
+	uid := "rclevinger"
+	p := LoadPage(uid)
 	RenderTemplate(w, "index", p)
+}
+
+//Handles the edit page
+func EditHandler(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
+	
+	uid := r.Form["uid"]
+	p := LoadPage(uid[0])
+	RenderTemplate(w, "edit", p)
 }
 
 
@@ -61,6 +71,7 @@ func Redirect(w http.ResponseWriter, r *http.Request) {
 func Handles() {
 
 	http.HandleFunc("/index.html", MakeHandler(IndexHandler))
+	http.HandleFunc("/edit.html", MakeHandler(EditHandler))
 	http.HandleFunc("/modify", modify.Modify)
 	http.HandleFunc("/", Redirect)
 }
