@@ -50,43 +50,43 @@
         <td><input name="disabled" type="checkbox" {{.Disabled}}><div class="label">Disabled</div></td>
     </tr>
     <tr>
-        <td><input name="seteamaccess" type="checkbox"><div class="label">SE Team member?</div></td>
+        <td><input name="seteamaccess" type="checkbox" {{.SeTeam}}><div class="label">SE Team member?</div></td>
     </tr>
     <tr>
-        <td><input name="jiraaccess" type="checkbox"><div class="label">JIRA Access</div></td>
+        <td><input name="jiraaccess" type="checkbox" {{.Jira}}><div class="label">JIRA Access</div></td>
     </tr>
     <tr>
-        <td><input name="jrlsaccess" type="checkbox"><div class="label">JRebel License Server Admin Access</div></td>
+        <td><input name="jrlsaccess" type="checkbox" {{.Jrebel}}><div class="label">JRebel License Server Admin Access</div></td>
     </tr>
     <tr>
-        <td><input name="nagiosaccess" type="checkbox"><div class="label">Nagios Access</div></td>
+        <td><input name="nagiosaccess" type="checkbox" {{.Nagios}}><div class="label">Nagios Access</div></td>
     </tr>
     <tr>
-        <td><input name="owncloudaccess" type="checkbox"><div class="label">OwnCloud Access</div></td>
+        <td><input name="owncloudaccess" type="checkbox" {{.Owncloud}}><div class="label">OwnCloud Access</div></td>
     </tr>
     <tr>
-        <td><input name="rocketchataccess" type="checkbox"><div class="label">Rocket.Chat Access</div></td>
+        <td><input name="rocketchataccess" type="checkbox" {{.RocketChat}}><div class="label">Rocket.Chat Access</div></td>
     </tr>
     <tr>
-        <td><input name="sassydevaccess" type="checkbox"><div class="label">Sassy Dev Access</div></td>    
+        <td><input name="sassydevaccess" type="checkbox" {{.SassyDev}}><div class="label">Sassy Dev Access</div></td>    
     </tr>
     <tr>
-        <td><input name="sassyprodaccess" type="checkbox"><div class="label">Sassy Prod Access</div></td>    
+        <td><input name="sassyprodaccess" type="checkbox" {{.SassyProd}}><div class="label">Sassy Prod Access</div></td>    
     </tr>
     <tr>
-        <td><input name="savvyservicedeskaccess" type="checkbox"><div class="label">Savvy Service Desk</div></td>    
+        <td><input name="savvyservicedeskaccess" type="checkbox" {{.SavvyServiceDesk}}><div class="label">Savvy Service Desk</div></td>    
     </tr>
     <tr>
-        <td><input name="solaccess" id="solaccess" type="checkbox"><div class="label">Solaris/Linux Access</div></td>
+        <td><input name="solaccess" id="solaccess" type="checkbox" {{.Solaris_Linux}}><div class="label">Solaris/Linux Access</div></td>
     </tr>
     <tr>
-        <td><input name="svnaccess" type="checkbox"><div class="label">Subversion Access</div></td>
+        <td><input name="svnaccess" type="checkbox"><div class="label" {{.Subversion}}>Subversion Access</div></td>
     </tr>
     <tr>
-        <td><input name="vncaccess" type="checkbox"><div class="label">VNC Access</div></td>	
+        <td><input name="vncaccess" type="checkbox"><div class="label" {{.VNC}}>VNC Access</div></td>	
     </tr>
     <tr>
-        <td><input name="wikiaccess" type="checkbox"><div class="label">Wiki Access</div></td>
+        <td><input name="wikiaccess" type="checkbox"><div class="label" {{.Wiki}}>Wiki Access</div></td>
     </tr>
     <tr>
 	    <td></td><td><div class="submit"><input type="submit" name="submitChanges" value="Submit Changes"></div></td>

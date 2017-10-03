@@ -132,12 +132,64 @@ func Search(uid string) *Page{
 		homeDirectory := entry.GetAttributeValue("homeDirectory")
 		loginShell := entry.GetAttributeValue("loginShell")
 		disabled := ""
+		seteam := ""
+		jira := ""
+		jrebel := ""
+		nagios := ""
+		owncloud := ""
+		rocketchat := ""
+		sassydev := ""
+		sassyprod := ""
+		savvyservicedesk := ""
+		solaris_linux := ""
+		subversion := ""
+		vnc := ""
+		wiki := ""
 		for _, empType := range entry.GetAttributeValues("employeeType") {
 			if(empType == "disabled") {
 				disabled = "checked"
 			}
+			if(empType == "se-team") {
+				seteam = "checked"
+			}
+			if(empType == "jira-user") {
+				jira = "checked"
+			}
+			if(empType == "jrebel-user") {
+				jrebel = "checked"
+			}
+			if(empType == "nagios-user") {
+				nagios = "checked"
+			}
+			if(empType == "owncloud-user") {
+				owncloud = "checked"
+			}
+			if(empType == "rocketchat-user") {
+				rocketchat = "checked"
+			}
+			if(empType == "sassy-dev-user") {
+				sassydev = "checked"
+			}
+			if(empType == "sassy-prod-user") {
+				sassyprod = "checked"
+			}
+			if(empType == "savvyservicedesk-user") {
+				savvyservicedesk = "checked"
+			}
+			if(empType == "linux-user") {
+				solaris_linux = "checked"
+			}
+			if(empType == "svn-user") {
+				subversion = "checked"
+			}
+			if(empType == "vnc") {
+				vnc = "checked"
+			}
+			if(empType == "wiki-user") {
+				wiki = "checked"
+			}
 		}
-		return LoadEditPage(uid, given, last, mail, display, gnum, mobile, uidNumber, homeDirectory, loginShell, disabled, "", "", "", "", "", "", "", "", "", "", "", "", "",)
+		return LoadEditPage(uid, given, last, mail, display, gnum, mobile, uidNumber, homeDirectory, loginShell, disabled, seteam, jira, jrebel, nagios, owncloud, rocketchat, sassydev, sassyprod, savvyservicedesk, solaris_linux, subversion, vnc, wiki)
 	}
 	
 	return LoadPage()
