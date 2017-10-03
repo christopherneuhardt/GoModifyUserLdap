@@ -106,7 +106,7 @@ func Search(uid string) *Page{
 	searchRequest := ldap.NewSearchRequest(
     "uid=rclevinger,ou=People,dc=spg,dc=cgi,dc=com", // The base dn to search
     ldap.ScopeWholeSubtree, ldap.NeverDerefAliases, 0, 0, false,
-	"(&(uid=rclevinger))",// The filter to apply
+	"(&(uid="+ uid +"))",// The filter to apply
     []string{"sn"},                    // A list attributes to retrieve
     nil,
 	)
