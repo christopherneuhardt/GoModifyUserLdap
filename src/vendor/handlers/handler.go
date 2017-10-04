@@ -155,7 +155,7 @@ func Search(uid string) *Page{
 			if(empType == "jira-user") {
 				jira = "checked"
 			}
-			if(empType == "jrebel-user") {
+			if(empType == "jrebel-admin") {
 				jrebel = "checked"
 			}
 			if(empType == "nagios-user") {

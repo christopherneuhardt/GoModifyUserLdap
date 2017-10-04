@@ -1,3 +1,23 @@
+
+<head>
+    <script>
+        function enableFields() {
+             if (document.getElementById("solaccess").checked){
+                document.getElementById("gidnumber").disabled = false;
+                document.getElementById("uidnumber").disabled = false;
+                document.getElementById("homedirectory").disabled = false;
+                document.getElementById("loginshell").disabled = false;
+             }
+             else{
+                document.getElementById("gidnumber").disabled = true;
+                document.getElementById("uidnumber").disabled = true;
+                document.getElementById("homedirectory").disabled = true;
+                document.getElementById("loginshell").disabled = true;
+             }
+        }
+    </script>
+</head>
+<body onload='enableFields();'>
 <div class="form">
     <div align=center style="font-size:14px;font-weight:bold;">User Modification</div>
 	<form action="modify" method="post">
@@ -28,11 +48,11 @@
 
     <tr>
         <td><div>UID Number:*</div></td>    
-    <td><div class="field"><input name="uidnumber" id="uidnumber" type="text" value="{{.UidNum}}"></div></td><td><a href="http://bud.ams.com" target="_blank">Find Employee in BUD</a></td>
+    <td><div class="field"><input name="uidnumber" id="uidnumber" type="text" value="{{.UidNum}}" disabled></div></td><td><a href="http://bud.ams.com" target="_blank">Find Employee in BUD</a></td>
     </tr>
     <tr>
         <td><div>Home Directory:</div></td>    
-	<td><div class="field"><input name="homedirectory" id="homedirectory" type="text" value="{{.HomeDir}}"></div></td>
+	<td><div class="field"><input name="homedirectory" id="homedirectory" type="text" value="{{.HomeDir}}" disabled></div></td>
     </tr>
     <tr>
         <td><div>Display Name:</div></td>    
@@ -40,7 +60,7 @@
     </tr>
     <tr>
         <td><div>Login Shell:</div></td>    
-	<td><div class="field"><input name="loginshell" id="loginshell" type="text" value="{{.LogShell}}"></div></td>
+	<td><div class="field"><input name="loginshell" id="loginshell" type="text" value="{{.LogShell}}" disabled></div></td>
     </tr>
     <tr>
         <td><div>Mobile:</div></td>    
@@ -77,16 +97,16 @@
         <td><input name="savvyservicedeskaccess" type="checkbox" {{.SavvyServiceDesk}}><div class="label">Savvy Service Desk</div></td>    
     </tr>
     <tr>
-        <td><input name="solaccess" id="solaccess" type="checkbox" {{.Solaris_Linux}}><div class="label">Solaris/Linux Access</div></td>
+        <td><input name="solaccess" id="solaccess" type="checkbox" {{.Solaris_Linux}}  onclick="enableFields()"><div class="label">Solaris/Linux Access</div></td>
     </tr>
     <tr>
-        <td><input name="svnaccess" type="checkbox"><div class="label" {{.Subversion}}>Subversion Access</div></td>
+        <td><input name="svnaccess" type="checkbox" {{.Subversion}}><div class="label">Subversion Access</div></td>
     </tr>
     <tr>
-        <td><input name="vncaccess" type="checkbox"><div class="label" {{.VNC}}>VNC Access</div></td>	
+        <td><input name="vncaccess" type="checkbox" {{.VNC}}><div class="label">VNC Access</div></td>	
     </tr>
     <tr>
-        <td><input name="wikiaccess" type="checkbox"><div class="label" {{.Wiki}}>Wiki Access</div></td>
+        <td><input name="wikiaccess" type="checkbox" {{.Wiki}}><div class="label">Wiki Access</div></td>
     </tr>
     <tr>
 	    <td></td><td><div class="submit"><input type="submit" name="submitChanges" value="Submit Changes"></div></td>
@@ -94,3 +114,4 @@
 </table>
 </form>
 </div>
+</body>
